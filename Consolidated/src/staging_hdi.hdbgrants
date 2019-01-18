@@ -1,0 +1,10 @@
+{
+	"staging_edw_crosscontainer": {
+		"object_owner" : {
+			"container_roles": ["reader#"]
+		},
+		"application_user" : {
+			"container_roles": ["reader"]
+		}
+	}
+}

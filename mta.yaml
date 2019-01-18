@@ -1,0 +1,63 @@
+ID: EDW
+_schema-version: '2.0'
+description: EDW project
+version: 0.0.1
+modules:
+  - name: staging
+    type: hdb
+    path: staging
+    requires:
+      - name: hdi_staging
+        properties:
+          TARGET_CONTAINER: '~{staging-hdi-container-name}'
+  - name: Consolidated
+    type: hdb
+    path: Consolidated
+    requires:
+      - name: hdi_Consolidated
+        properties:
+          TARGET_CONTAINER: '~{Consolidated-hdi-container-name}'
+      - name: hdi_staging_edw_cross_container_service
+        properties:
+          key: staging_edw_crosscontainer
+          service: '~{the-service-name}'
+        group: SERVICE_REPLACEMENTS
+
+      - name: cross-container-service-1
+        group: SERVICE_REPLACEMENTS
+
+        properties:
+          key: ServiceName_1
+          service: ~{the-service-name}
+                            
+
+
+resources:
+  - name: hdi_staging
+    parameters:
+      config:
+        schema: STAGING
+    properties:
+      staging-hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: hdi_Consolidated
+    parameters:
+      config:
+        schema: CONSOLIDATED
+    properties:
+      Consolidated-hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: hdi_staging_edw_cross_container_service
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: SSURAMPALLY-lc21i8umofpdkp2z-EDW-hdi_staging
+    properties:
+      the-service-name: '${service-name}'
+
+  - name: cross-container-service-1
+    parameters:
+       service-name: SSURAMPALLY-lc21i8umofpdkp2z-EDW-hdi_staging
+    properties:
+       the-service-name: ${service-name}
+    type: org.cloudfoundry.existing-service
+

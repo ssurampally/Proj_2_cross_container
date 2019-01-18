@@ -1,0 +1,14 @@
+/*@@layout{"layoutInfo":{"x":-622,"y":-114.5}}*/
+entity Customer {
+    key partnerid   : String(10);
+        phonenumber : String(20);
+        addressid   : String(40);
+        Companyname : String(40);
+};
+
+/*@@layout{"layoutInfo":{"x":-934,"y":-155.5}}*/
+entity Address {
+    key addressid : String(40);
+        Country   : String(20);
+        Region    : String(30);
+};

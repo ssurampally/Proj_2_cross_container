@@ -1,0 +1,16 @@
+{
+  "BP_SYN": {
+    "target": {
+      "object": "MD.BusinessPartner",
+      "schema": "STAGING_1",
+      "database": "POC"
+    }
+  },
+  "ADD_SYN": {
+    "target": {
+      "object": "MD.Addresses",
+      "schema": "STAGING_1",
+      "database": "POC"
+    }
+  }
+}
