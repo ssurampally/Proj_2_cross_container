@@ -32,6 +32,26 @@ modules:
                             
 
 
+
+  - name: s4Container
+    type: hdb
+    path: s4Container
+    requires:
+     - name: hdi_s4Container
+       properties:
+         TARGET_CONTAINER: ~{hdi-container-name}
+
+
+
+     - name: cross-container-service-2
+       group: SERVICE_REPLACEMENTS
+
+       properties:
+         key: ServiceName_1
+         service: ~{the-service-name}
+                           
+
+
 resources:
   - name: hdi_staging
     parameters:
@@ -57,6 +77,23 @@ resources:
   - name: cross-container-service-1
     parameters:
        service-name: SSURAMPALLY-lc21i8umofpdkp2z-EDW-hdi_staging
+    properties:
+       the-service-name: ${service-name}
+    type: org.cloudfoundry.existing-service
+
+
+  - name: hdi_s4Container
+    parameters:
+       config:
+          schema: s4container
+    properties:
+       hdi-container-name: ${service-name}
+    type: com.sap.xs.hdi-container
+
+
+  - name: cross-container-service-2
+    parameters:
+       service-name: Cross_schema_s4hana
     properties:
        the-service-name: ${service-name}
     type: org.cloudfoundry.existing-service
