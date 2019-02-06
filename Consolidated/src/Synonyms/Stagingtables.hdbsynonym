@@ -1,0 +1,9 @@
+{
+  "BusienssPartner": {
+    "target": {
+      "object": "BusinessPartner",
+      "schema": "STAGING_1",
+      "database": "POC"
+    }
+  }
+}
