@@ -1,5 +1,5 @@
 {
-	"hdi-user-service": {
+	"hdi-crossContainer-service": {
 		"object_owner" : {
 			"container_roles": ["reader#"]
 		},

@@ -19,7 +19,7 @@ modules:
           TARGET_CONTAINER: '~{Consolidated-hdi-container-name}'
       - name: hdi_staging
         properties:
-          key: hdi-user-service
+          key: hdi-crossContainer-service
           service: '~{staging-hdi-container-name}'
         group: SERVICE_REPLACEMENTS
   - name: s4Container
@@ -34,6 +34,13 @@ modules:
         properties:
           key: ServiceName_1
           service: '~{the-service-name}'
+
+  - name: Central_MDM
+    type: hdb
+    path: Central_MDM
+    requires:
+     - name: hdi_Central_MDM
+
 resources:
   - name: hdi_staging
     parameters:
@@ -62,3 +69,12 @@ resources:
     properties:
       the-service-name: '${service-name}'
     type: org.cloudfoundry.existing-service
+
+  - name: hdi_Central_MDM
+    parameters:
+       config:
+          schema: Central_MDM
+    properties:
+       hdi-container-name_2: ${service-name}
+    type: com.sap.xs.hdi-container
+
